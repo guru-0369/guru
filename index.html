@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="w.css">
+</head>
+<body>
+    <div class="rowhead">
+        <div class="col1">
+            <ul style="list-style-type: none;">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Signup</a></li>
+            </ul>
+        </div>
+        <div class="col2">
+            <h1>My Project</h1>
+        </div>
+    </div>
+
+    <div class="tdd">
+        <form>
+            <table border="0">
+                <tr>
+                    <td><label for="gilli">Name:</label></td>
+                    <td>
+                        <input type="text" id="gilli" placeholder="Enter the F-name">
+                        <div class="error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="solli">Email:</label></td>
+                    <td>
+                        <input type="email" id="solli" placeholder="Enter the email">
+                        <div class="error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="bulli">Area:</label></td>
+                    <td>
+                        <input type="text" id="bulli" placeholder="Enter the area">
+                        <div class="error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Nationality:</label></td>
+                    <td>
+                        <input type="radio" name="nation" value="Indian" id="indian">
+                        <label for="indian">Indian</label>
+                        <input type="radio" name="nation" value="NRI" id="nri">
+                        <label for="nri">NRI</label>
+                        <div class="error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="nalli">State:</label></td>
+                    <td>
+                        <select id="nalli">
+                            <option>Tamilnadu</option>
+                            <option>Andhra Pradesh</option>
+                            <option>Pondicherry</option>
+                            <option>Kerala</option>
+                        </select>
+                        <div class="error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="submitdata()">Submit</button></td>
+                    <td><input type="reset"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        function submitdata() {
+            let nameInput = document.getElementById("gilli");
+            let emailInput = document.getElementById("solli");
+            let areaInput = document.getElementById("bulli");
+            let nationInputs = document.getElementsByName("nation");
+            let stateInput = document.getElementById("nalli");
+
+            let name = nameInput.value.trim();
+            let email = emailInput.value.trim();
+            let area = areaInput.value.trim();
+            let nation = "";
+            for (let input of nationInputs) {
+                if (input.checked) {
+                    nation = input.value;
+                    break;
+                }
+            }
+            let state = stateInput.value;
+
+            console.log(name, email, area, nation, state);
+
+            // Validate name
+            if (name === '') {
+                setError(nameInput, "Name is empty");
+            } else {
+                setSuccess(nameInput);
+            }
+
+            // Validate email
+            if (email === '') {
+                setError(emailInput, "Email is empty");
+            } else {
+                setSuccess(emailInput);
+            }
+
+            // Validate area
+            if (area === '') {
+                setError(areaInput, "Area is empty");
+            } else {
+                setSuccess(areaInput);
+            }
+
+            // Validate nationality
+            if (nation === '') {
+                setError(nationInputs[0], "Please select nationality");
+            } else {
+                setSuccess(nationInputs[0]);
+            }
+        }
+
+        function setError(element, msg) {
+            let parent = element.parentElement;
+            let errorDiv = parent.querySelector(".error");
+            if (errorDiv) errorDiv.innerText = msg;
+        }
+
+        function setSuccess(element) {
+            let parent = element.parentElement;
+            let errorDiv = parent.querySelector(".error");
+            if (errorDiv) errorDiv.innerText = '';
+        }
+    </script>
+</body>
+</html>
